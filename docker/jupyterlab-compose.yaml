@@ -1,0 +1,18 @@
+version: "3"
+services:
+  jupyterlab_gpu:
+    image: cschranz/gpu-jupyter:v1.6_cuda-12.0_ubuntu-22.04
+    container_name: jupyterlab_gpu
+    restart: always
+    devices:
+      - "/dev/kfd"
+      - "/dev/drm"
+    ports:
+      - "8848:8888"
+    volumes:
+      - /home/syran/sandbox/docker/jupyter:/home/jovyan
+    environment:
+      JUPYTER_TOKEN: ${JUPYTER_TOKEN}
+      GRANT_SUDO: yes
+      JUPYTER_ENABLE_LAB: yes
+    user: root
